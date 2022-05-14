@@ -5,23 +5,8 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="initial-scale=1, width=device-width">
         <title>Online</title>
-        <script>
 
 
-            function loadFile(filePath) {
-              var result = null;
-              var xmlhttp = new XMLHttpRequest();
-              xmlhttp.open("GET", filePath, false);
-              xmlhttp.send();
-              if (xmlhttp.status==200) {
-                result = xmlhttp.responseText;
-              }
-
-              return result;
-            }
-        var myStuff = loadFile("database.txt");
-        alert(myStuff);
-        </script>
     </head>
     <body>
     <h1 style="text-allign: center">Список активных файлов</h1>
@@ -44,6 +29,34 @@
 
     </table>
 
+<script>
+            function loadFile(filePath) {
+              var result = null;
+              var xmlhttp = new XMLHttpRequest();
+              xmlhttp.open("GET", filePath, false);
+              xmlhttp.send();
+              if (xmlhttp.status==200) {
+                result = xmlhttp.responseText;
+              }
+
+              return result;
+            }
+            var myStuff = loadFile("database.txt");
+
+            let html = '';
+
+            for (line of myStuff.split('\n')){
+                html += '<tr>';
+                for (word of line.split(" ")) {
+
+                    html += `<td>${word}</td>`;
+                }
+                html += `</tr>`;
+            }
+
+            document.querySelector('tbody').innerHTML = html;
+
+        </script>
 
 
     </body>
